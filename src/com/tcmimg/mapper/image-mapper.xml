@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
+<mapper namespace="com.tcmimg.mapper.ImageMapper">
+   <resultMap type="com.tcmimg.po.Image" id="imageResultMap">
+        <id property="plantLabelID" column="plant_label_id" />
+        <result property="plantID" column="plant_id" />
+        <result property="plantName" column="plant_name" />
+        <result property="picName" column="pic_name" />
+        <result property="picPath" column="pic_path" />
+        <result property="picType" column="pic_type" />
+        <result property="picPart" column="pic_part" />
+        <result property="picDescription" column="pic_description" />
+        <result property="isLabeled" column="is_labeled" />
+        <result property="isCopiedToMed" column="is_copied_to_med" />
+        
+   </resultMap>
+   
+   <!-- id和mapper接口中的方法名对应，resultType使用mybatis.xml中的别名 -->  
+   <select id="getFirstUnlabeledImage" resultType="image" resultMap="imageResultMap">
+         <![CDATA[         
+              select * from plant_pic_label where is_labeled = 0  ORDER BY plant_label_id asc limit 1
+         ]]> 
+   </select>     
+   <select id="getAllImages" resultType="list" resultMap="imageResultMap">  
+         <![CDATA[     
+              select * from plant_pic_label   
+         ]]>    
+   </select>    
+
+   <select id="getImageById" parameterType="long" resultType="image" resultMap="imageResultMap">    
+         <![CDATA[        
+             select * from plant_pic_label where plant_label_id >= #{id}  and  is_labeled = 0 ORDER BY plant_label_id asc limit 1
+         ]]>    
+   </select>   
+   
+   <insert id="addPic" parameterType="image">         
+        insert into plant_pic_label(plant_id, plant_name, pic_name, pic_path,pic_type, pic_part, pic_description, is_labeled,is_copied_to_med) 
+        values(#{plantID}, #{plantName}, #{picName}, #{picPath},#{picType}, #{picPart}, #{picDescription}, #{isLabeled},#{isCopiedToMed})    
+   </insert>  
+   
+   <update id="labelImage" parameterType="image"> 
+        update plant_pic_label set        
+        pic_name = #{picName},
+        pic_path = #{picPath},       
+        pic_type = #{picType},      
+        pic_part = #{picPart},
+        pic_description = #{picDescription},       
+        is_labeled = #{isLabeled}    
+        where plant_label_id = #{plantLabelID}    
+   </update>   
+   
+   <select id="selectPlantIDByPlantName" resultType="Long" parameterType="String">  
+        select plant_id as plantID    	  
+            from plant
+            where plant_name_zh = #{plantName} limit 1
+   </select>
+   
+</mapper>

@@ -1,0 +1,21 @@
+body{
+	font-size:15px;
+}
+
+#top{
+	
+}
+#content{
+	width:400px;
+	text-align:center;
+}
+
+.label_info{
+	margin-top:4px;
+	vertical-align:top;
+}
+
+#label_info_div{
+	min-width:450px;
+}
+
