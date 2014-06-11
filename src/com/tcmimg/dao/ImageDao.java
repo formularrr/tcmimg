@@ -12,5 +12,5 @@ public interface ImageDao {
 	public Image getFirstUnlabeledImage() throws DataAccessException;
 	public Image getImageById(long id) throws DataAccessException;
 	public boolean labelImage(Image image) throws DataAccessException;
-
+	public String getImgPlant(String imgPath);
 }

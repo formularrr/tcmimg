@@ -11,5 +11,7 @@ public interface ImageMapper extends SqlMapper {
 	public List<Image> getAllImages(); 
 	public Image getFirstUnlabeledImage();   
 	public Image getImageById(long id); 
-	public void labelImage(Image image);  
+	public void labelImage(Image image); 
+	
+	public String getImgPlant(String imgPath);
 }

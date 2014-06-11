@@ -51,4 +51,10 @@ public class ImageDaoImpl implements ImageDao{
 		 return flag;
 	}
 
+	@Override
+	public String getImgPlant(String imgPath) {
+		// TODO Auto-generated method stub
+		return mapper.getImgPlant(imgPath);
+	}
+
 }

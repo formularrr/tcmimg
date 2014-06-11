@@ -1,14 +1,30 @@
 package com.tcmimg.controller;
+import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tcmimg.po.Image;
 import com.tcmimg.service.ImageService;
@@ -26,41 +42,47 @@ public class ImageController {
    {
 	   return "/index.jsp";
    }
-      
-   @RequestMapping("/getfirstimage")
-   public String getFirstUmlabeledImage(Model model)
-   {
-	  // System.out.println("###ID:"+id)
-	   
-	   model.addAttribute(service.getFirstUnlabeledImage());
-	   
-	   Image i = service.getFirstUnlabeledImage();
-	   
-	   System.out.println(i.getPicPath());
-	   
-	   System.out.println("################ model after" + model);
-	   
-	   return "/show.jsp";
-   }
+     
    
+   @RequestMapping("/uploadimage")
+   public void uploadImage(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException
+   {
+       DiskFileItemFactory fac = new DiskFileItemFactory();
+       ServletFileUpload upload = new ServletFileUpload(fac);
+       upload.setHeaderEncoding("utf-8");
+       List fileList = null;
+       try {
+           fileList = upload.parseRequest(request);
+       } catch (FileUploadException ex) {
+           return;
+       }
+	   String name = service.uploadImage(fileList);
+
+       response.getWriter().print(name);
+   }
+	   
+
+  @SuppressWarnings("unchecked")
+@RequestMapping(value="/searchimage",method=RequestMethod.POST)
+
+   public void searchImage(HttpServletRequest request, HttpServletResponse response, Model model, @RequestBody String name) throws IOException
+   {
+	   System.out.println("searchimage :" + name);
+	   response.setContentType("text/plain; charset=GB2312");
+	  // Map<String, List<String>> rs = new HashMap<String, List<String>>();
+	   //rs.put("rs", service.searchImage(name));
+	   response.getWriter().print(service.searchImage(name));
+	   //model.addAttribute("rs", rs);
+	   //return rs;
+   }
    
    @RequestMapping("/image")
-   public String image(Model model,@RequestParam String id)
+   public String image(Model model)
    {
-	   long plantLabelID = Long.parseLong(id) + 1;
-	   model.addAttribute(service.getImageById(plantLabelID));
-	   model.addAttribute("pathRoot", pathRoot);
 	   return "/image.jsp";
    }
    
-   @RequestMapping("/default")
-   public String defaultPage(Model model)
-   {
-	   model.addAttribute(service.getFirstUnlabeledImage());
-	   model.addAttribute("pathRoot", pathRoot);
-	   return "/image.jsp";
-   }
-   
+/*   
    @RequestMapping("/submitlabel")
    public String submitLabel(Model model, @RequestParam String labelID, @RequestParam String plantID, @RequestParam String picPath, @RequestParam String picName, 
 		   @RequestParam String picType, @RequestParam String picPart, @RequestParam String picDescription) throws NumberFormatException, IOException
@@ -71,7 +93,7 @@ public class ImageController {
 	   model.addAttribute(service.getFirstUnlabeledImage());
 	   model.addAttribute("pathRoot", pathRoot);
 	   return "/image.jsp";
-   }
+   }*/
 
    
 /*   @ExceptionHandler(Exception.class)

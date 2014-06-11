@@ -17,6 +17,12 @@
         
    </resultMap>
    
+   <select id="getImgPlant" resultType="String" parameterType="String">  
+         <![CDATA[     
+              select plant_name from img_path where img_path = #{imgPath}  limit 1 
+         ]]>    
+   </select>
+   
    <!-- id和mapper接口中的方法名对应，resultType使用mybatis.xml中的别名 -->  
    <select id="getFirstUnlabeledImage" resultType="image" resultMap="imageResultMap">
          <![CDATA[         

@@ -21,6 +21,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="./resources/js/jquery.jcarousel.js"></script>
 	<script type="text/javascript" src="./resources/js/fancybox/jquery.fancybox-1.3.1.js"></script>
 	<script type="text/javascript" src="./resources/js/jquery-func.js"></script>
+	<script type="text/javascript" src="./resources/js/image.js"></script>
+	
+	<!-- 图片上传插件 -->
+	<script type="text/javascript" src="./resources/uploadify/jquery.uploadify.min.js"></script>
+	<link rel="stylesheet" href="./resources/uploadify/uploadify.css" type="text/css" media="screen" />
+	
+	<!-- 图片轮播插件 -->
+	<script type="text/javascript" src="./resources/jquery.bxslider/jquery.bxslider.min.js"></script>
+	<link rel="stylesheet" href="./resources/jquery.bxslider/jquery.bxslider.css" type="text/css" media="screen" />
 	
 </head>
 <body>
@@ -49,9 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="navigation">
 		<ul>
 			<li><a href="index.html" ><span>首页</span></a></li>
-	<!-- 			<li><a href="#"><span>视频标注</span></a></li>
-				<li><a href="image.html?id=0"><span>图像标注</span></a></li> -->
-			<li><a href="image.html?id=0" class="active"><span>图像检索</span></a></li>
+			<li><a href="image.html" class="active"><span>图像检索</span></a></li>
 			<li><a href="#"><span>联系我们</span></a></li>
 			
 		</ul>
@@ -59,20 +66,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	
 	<div id="main" class="big-box">
-
-		
 		 <div class="bg-top">
 			<div class="bg-bottom">
-
-				
 				<!-- Top Text Block -->
 				<div id="top" class="text-block">
 					<!-- Content -->
 					<div id="content" class="box">
 						<h3>请选择想要检索的图片 </h3>
-									<form name="form0" id="form0" >
-			<input type="file" name="file0" id="file0" multiple="multiple" /><br><img src="" id="img0" >			
-			</form>
+						<form name="form0" id="form0" >
+							<input type="file" name="upload_image" id="upload_image" multiple="multiple" /><br>	<img src="" id="img0" ></br>	
+							<button type="button" style="display:none" id="search_image">开始检索</button>
+						</form>
 					</div>
 					<!-- Content -->
 					<!-- Box -->
@@ -83,127 +87,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						
 						<p>Cras aliquet tellus sed dolor aliquet condimentum &hellip; <a href="#">read more</a></p>
 					</div>
-							<div id="content" class="box">
 
-		</div>
 					<!-- /Box -->
 					<div class="cl">&nbsp;</div>
 					
 				</div>
 				<!-- /Top Text Block -->
-				
-				
-				
-				<!-- Small Slider -->
-				<div id="small-slider" class="slider">
-					<!-- Sldier Headings -->
-					<div class="slider-head">
-						<h4>Whats HOT this week</h4>
-					
-						<div class="categories">
-							<a href="#" class="active">Events</a>
-							<a href="#">News</a>
-							<a href="#">Interviews</a>
-							<a href="#">Opinions</a>
-						</div>
-						<div class="cl">&nbsp;</div>
-					</div>
-					<!-- /Slider Headings -->
-					
-					<!-- Slider Holder -->
-					<div class="slider-holder">
-						<ul>
-							<li>
-								<a href="css/images/big-slide-1.jpg" rel="small-slider">
-									<span>&nbsp;</span>
-									<img src="css/images/small-slider-1.jpg" alt="" />
-								</a>
-							</li>
-							<li>
-								<a href="css/images/big-slide-1.jpg" rel="small-slider">
-									<span>&nbsp;</span>
-									<img src="css/images/small-slider-2.jpg" alt="" />
-								</a>
-							</li>
-							<li>
-								<a href="css/images/big-slide-1.jpg" rel="small-slider">
-									<span>&nbsp;</span>
-									<img src="css/images/small-slider-3.jpg" alt="" />
-								</a>
-							</li>
-							<li>
-								<a href="css/images/big-slide-1.jpg" rel="small-slider">
-									<span>&nbsp;</span>
-									<img src="css/images/small-slider-4.jpg" alt="" />
-								</a>
-							</li>
-							<li>
-								<a href="css/images/big-slide-1.jpg" rel="small-slider">
-									<span>&nbsp;</span>
-									<img src="css/images/small-slider-5.jpg" alt="" />
-								</a>
-							</li>
-							<li>
-								<a href="css/images/big-slide-1.jpg" rel="small-slider">
-									<span>&nbsp;</span>
-									<img src="css/images/small-slider-6.jpg" alt="" />
-								</a>
-							</li>
-							<li>
-								<a href="css/images/big-slide-1.jpg" rel="small-slider">
-									<span>&nbsp;</span>
-									<img src="css/images/small-slider-7.jpg" alt="" />
-								</a>
-							</li>
-							<li>
-								<a href="css/images/big-slide-1.jpg" rel="small-slider">
-									<span>&nbsp;</span>
-									<img src="css/images/small-slider-1.jpg" alt="" />
-								</a>
-							</li>
-							<li>
-								<a href="css/images/big-slide-1.jpg" rel="small-slider">
-									<span>&nbsp;</span>
-									<img src="css/images/small-slider-2.jpg" alt="" />
-								</a>
-							</li>
-							<li>
-								<a href="css/images/big-slide-1.jpg" rel="small-slider">
-									<span>&nbsp;</span>
-									<img src="css/images/small-slider-3.jpg" alt="" />
-								</a>
-							</li>
-							<li>
-								<a href="css/images/big-slide-1.jpg" rel="small-slider">
-									<span>&nbsp;</span>
-									<img src="css/images/small-slider-4.jpg" alt="" />
-								</a>
-							</li>
-							<li>
-								<a href="css/images/big-slide-1.jpg" rel="small-slider">
-									<span>&nbsp;</span>
-									<img src="css/images/small-slider-5.jpg" alt="" />
-								</a>
-							</li>
-							<li>
-								<a href="css/images/big-slide-1.jpg" rel="small-slider">
-									<span>&nbsp;</span>
-									<img src="css/images/small-slider-6.jpg" alt="" />
-								</a>
-							</li>
-							<li>
-								<a href="css/images/big-slide-1.jpg" rel="small-slider">
-									<span>&nbsp;</span>
-									<img src="css/images/small-slider-7.jpg" alt="" />
-								</a>
-							</li>
-						</ul>
-						
-						<div class="cl">&nbsp;</div>
-					</div>
-					<!-- /Slider Holder -->
-				</div>
-				<!-- /Small Slider -->
+				<ul class="bxslider" id="search_result"></ul>
 				
 				<!-- Bottom Text Block -->
 				<div id="bottom" class="text-block">
@@ -243,30 +133,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 				
 			</div>
-		</di
 	</div>
 
 </div>
-<script>	
-$("#file0").change(function(){
-	var objUrl = getObjectURL(this.files[0]) ;
-	console.log("objUrl = "+objUrl) ;
-	if (objUrl) {
-		$("#img0").attr("src", objUrl) ;
-	}
-}) ;
-//建立一個可存取到該file的url
-function getObjectURL(file) {
-	var url = null ; 
-	if (window.createObjectURL!=undefined) { // basic
-		url = window.createObjectURL(file) ;
-	} else if (window.URL!=undefined) { // mozilla(firefox)
-		url = window.URL.createObjectURL(file) ;
-	} else if (window.webkitURL!=undefined) { // webkit or chrome
-		url = window.webkitURL.createObjectURL(file) ;
-	}
-	return url ;
-}
-</script>
+
 </body>
 </html>

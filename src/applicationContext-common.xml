@@ -18,7 +18,7 @@
     <!-- 配置DataSource数据源 -->  
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>  
-       <property name="url" value="jdbc:mysql://10.15.62.29/tcm"/>  
+       <property name="url" value="jdbc:mysql://10.15.62.29/tcmimg"/>  
        <property name="username" value="root"/>  
        <property name="password" value="123"/> 
     </bean>
@@ -39,5 +39,21 @@
        <property name="basePackage" value="com.tcmimg.mapper"/>  
        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />  
     </bean>
+   
+   <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">    
+		<property name="messageConverters">    
+			<list >    
+				<ref bean="mappingJacksonHttpMessageConverter" />    
+			</list>    
+		</property>    
+	</bean>
+	
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">  
+    <property name="supportedMediaTypes">  
+        <list>  
+            <value>application/json;charset=UTF-8</value>  
+       </list>  
+    </property>
+</bean>
    
 </beans>    

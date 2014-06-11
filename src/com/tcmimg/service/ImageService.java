@@ -15,4 +15,8 @@ public interface ImageService {
 	public boolean labelImage(Long labelID, Long plantID, String picPath,
 			String picName, String picType, String picPart,
 			String picDescription) throws IOException;
+	
+	public String uploadImage(List fileList);
+	
+	public List searchImage(String name);
 }
