@@ -1,6 +1,8 @@
 package com.tcmimg.po;
 
+import org.springframework.stereotype.Component;
 
+@Component("image")
 public class Image {
 	private static final long serialVersionUID = -7970848646314840509L;  
 	

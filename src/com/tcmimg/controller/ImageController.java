@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import Util.ImageConst;
+
 import com.tcmimg.po.Image;
 import com.tcmimg.service.ImageService;
 
@@ -57,8 +59,9 @@ public class ImageController {
            return;
        }
 	   String name = service.uploadImage(fileList);
-
-       response.getWriter().print(name);
+	   String type = service.getType(ImageConst.directory + name).substring(0, 1);
+	   System.out.println(type);
+       response.getWriter().print(name + "," + type);
    }
 	   
 
@@ -69,10 +72,10 @@ public class ImageController {
    {
 	   System.out.println("searchimage :" + name);
 	   response.setContentType("text/plain; charset=GB2312");
-	  // Map<String, List<String>> rs = new HashMap<String, List<String>>();
+	   Map<String, String> rs = new HashMap<String, String>();
 	   //rs.put("rs", service.searchImage(name));
 	   response.getWriter().print(service.searchImage(name));
-	   //model.addAttribute("rs", rs);
+
 	   //return rs;
    }
    

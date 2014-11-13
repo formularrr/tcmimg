@@ -19,4 +19,7 @@ body{
 	min-width:450px;
 }
 
-#slides img{width:300px; height:100px} 
+#search_result{
+	width:500px;
+	height:500px;
+}

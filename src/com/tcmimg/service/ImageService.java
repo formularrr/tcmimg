@@ -19,4 +19,6 @@ public interface ImageService {
 	public String uploadImage(List fileList);
 	
 	public List searchImage(String name);
+	
+	public String getType(String path);
 }

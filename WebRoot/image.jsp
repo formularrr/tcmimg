@@ -74,26 +74,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div id="content" class="box">
 						<h3>请选择想要检索的图片 </h3>
 						<form name="form0" id="form0" >
-							<input type="file" name="upload_image" id="upload_image" multiple="multiple" /><br>	<img src="" id="img0" ></br>	
-							<button type="button" style="display:none" id="search_image">开始检索</button>
+							<input type="file" name="upload_image" id="upload_image" multiple="multiple" /><br>	<img src="" id="img0" width="500px" height="300px"></br>	
+							
+							
+							<div id="pic_type_div" style="display:none">
+							<form name="plant_type_form">
+							<input type="radio" name="plant_type" value="1" /> 叶子
+							<input type="radio" name="plant_type" value="2" /> 花
+							<input type="radio" name="plant_type" value="3" /> 全株
+							<input type="radio" name="plant_type" value="4" /> 茎
+							<input type="radio" name="plant_type" value="5" /> 果实
+							</form>
+						</div>
+						
+						<button type="button" style="display:none" id="search_image">开始检索</button>
 						</form>
+						
+
+						
 					</div>
+					
+
 					<!-- Content -->
 					<!-- Box -->
-					<div class="box last">
+<!-- 					<div class="box last">
 						<h3>Consectetur  elit</h3>
 						
 						<p>Aliquam ac congue nunc. Mauris a tortor ut massa egestas tempus. Pellentesque tincidunt fermentum diam sagittis ullamcorper.</p>
 						
 						<p>Cras aliquet tellus sed dolor aliquet condimentum &hellip; <a href="#">read more</a></p>
-					</div>
+					</div> -->
 
 					<!-- /Box -->
 					<div class="cl">&nbsp;</div>
 					
 				</div>
 				<!-- /Top Text Block -->
-				<ul class="bxslider" id="search_result"></ul>
+				<!-- <h3>该图片有可能为 Carpinus betulus<h3></br> -->
+				<div class="bxslider" id="search_result"></div>
 				
 				<!-- Bottom Text Block -->
 				<div id="bottom" class="text-block">

@@ -1,5 +1,6 @@
 package Util;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +9,8 @@ public class ImageConst {
 	public static String pathRoot = "/tcm/search/plant/";
 	public static Map<String, String> picTypeMap;
 	public static Map<String, String> picPartMap;
+	public static File file;
+	public static String directory;
 	
 	static{
 		picTypeMap = new HashMap<String, String>();
@@ -21,5 +24,8 @@ public class ImageConst {
 		picPartMap.put("leaf", "4");
 		picPartMap.put("root", "5");
 		picPartMap.put("stem", "6");
+		
+		file = new File("");
+		directory = file.getAbsolutePath() + "/WebRoot/resources/uploads/";
 	}
 }

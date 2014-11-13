@@ -11,9 +11,18 @@ $(function(){
         'method'   : 'post',
         'onUploadSuccess' : function(file, data, response) {
         	console.log(data);
-        	$("#img0").attr("src", './resources/uploads/' + data);
+        	var datas = data.split(",");
+        	var name = datas[0];
+        	var type = datas[1];
+        	$("#img0").attr("src", './resources/uploads/' + name);
         	$("#search_image").show();
- 
+        	$("#pic_type_div").show();
+        	
+        	robj = document.getElementsByName("plant_type");
+        	for(i = 0; i < robj.length; i++)
+        		if(robj[i].value == type)
+        			robj[i].checked = true;
+        	
             
            	$("#search_image").live('click', function() {
            		$('.bxslider').html("");
@@ -21,7 +30,7 @@ $(function(){
         		var obj = $.ajax({
         			type : "post",
         			url : "searchimage.html",
-        			data : data,
+        			data : name,
         /*        			contentType : contentType,
         			dataType : "json",*/
         			cache : "false",
@@ -61,7 +70,7 @@ $(function(){
         					changeChinese(url);
         					console.log(url + " '''" + all[1]);
         					tmp += "<li>";
-        					tmp = tmp +	"<img src='" + url + "'  title='ssss' />"
+        					tmp = tmp +	"<img src='" + url + "'  width='500px' height='300px' />"
         					tmp += "</li>"
         				}
         				

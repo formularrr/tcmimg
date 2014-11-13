@@ -34,5 +34,6 @@
 	<classpathentry kind="lib" path="lib/lucene-queryparser-4.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-core-asl-1.9.12.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-mapper-asl-1.9.12.jar"/>
+	<classpathentry kind="lib" path="lib/libsvm.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
