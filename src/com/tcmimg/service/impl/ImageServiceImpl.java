@@ -14,6 +14,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
@@ -229,7 +230,7 @@ public class ImageServiceImpl implements ImageService{
 
 	@Override
 	public List searchImage(String name) {
-		List rs = new ArrayList<String>();
+		List<List<String>> rs = new ArrayList<List<String>>();
 		File directory = new File("");;
 		String path = ImageConst.directory;
 		File f = new File(path + name);
@@ -250,9 +251,7 @@ public class ImageServiceImpl implements ImageService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        //ImageSearcher searcher = ImageSearcherFactory.createCEDDImageSearcher(10);
         ImageSearcher searcher = ImageSearcherFactory.createJCDImageSearcher(10);
-        //ImageSearcher searcher = ImageSearcherFactory.createPHOGImageSearcher(10);
  
         ImageSearchHits hits = null;
 		try {
@@ -266,27 +265,29 @@ public class ImageServiceImpl implements ImageService{
             int beginIndex = fileName.indexOf("ImageRetrivalImages");
             String tmpName = "\\" + fileName.substring(beginIndex);
             
-            if(tmpName.contains("plantPhotoCn")){
-            	int index = tmpName.indexOf("plantPhotoCn") + 13;
-            	String plantName = tmpName.substring(index, tmpName.indexOf("\\", index));
-/*            	try {
-            		String gb = URLEncoder.encode(plantName, "gb2312");
-            		System.out.println(gb);
-					tmpName.replace(plantName, gb);
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}*/
-            	System.out.println(hits.score(i)  + ": " + tmpName + " , "+ plantName);
-            	
-            	rs.add(tmpName + " + " + plantName);
-            }
+//            if(tmpName.contains("plantPhotoCn")){
+//            	int index = tmpName.indexOf("plantPhotoCn") + 13;
+//            	String plantName = tmpName.substring(index, tmpName.indexOf("\\", index));
+///*            	try {
+//            		String gb = URLEncoder.encode(plantName, "gb2312");
+//            		System.out.println(gb);
+//					tmpName.replace(plantName, gb);
+//				} catch (UnsupportedEncodingException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}*/
+//            	System.out.println(hits.score(i)  + ": " + tmpName + " , "+ plantName);
+//            	
+//            	rs.add(tmpName + " + " + plantName);
+//            }
             
-            else{
+//            else{
 	            System.out.println(hits.score(i)  + ": " + tmpName + " , "+ dao.getImgPlant(tmpName));
-	           
-	            rs.add(tmpName + " + " + dao.getImgPlant(tmpName));
-            }
+	            List<String> tmp = new ArrayList<String>();
+	            tmp.add(tmpName);
+	            tmp.add(dao.getImgPlant(tmpName));
+	            rs.add(tmp);
+//            }
         }
     
 		return rs;

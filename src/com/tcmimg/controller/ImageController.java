@@ -10,6 +10,8 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -66,24 +68,25 @@ public class ImageController {
 	   
 
   @SuppressWarnings("unchecked")
-@RequestMapping(value="/searchimage",method=RequestMethod.POST)
-
-   public void searchImage(HttpServletRequest request, HttpServletResponse response, Model model, @RequestBody String name) throws IOException
+  @RequestMapping(value="/searchimage",method=RequestMethod.POST)
+   public void searchImage(HttpServletRequest request, HttpServletResponse response, Model model, @RequestBody Map<String, String> name) throws IOException
    {
 	   System.out.println("searchimage :" + name);
-	   response.setContentType("text/plain; charset=GB2312");
-	   Map<String, String> rs = new HashMap<String, String>();
-	   //rs.put("rs", service.searchImage(name));
-	   response.getWriter().print(service.searchImage(name));
+	   Map<String, List<String>> rs = new HashMap<String, List<String>>();
+	   rs.put("rs", service.searchImage(name.get("name")));
+	   JSONObject json = JSONObject.fromObject(rs);
+	   response.getWriter().print(json);
 
-	   //return rs;
    }
+   
+
    
    @RequestMapping("/image")
    public String image(Model model)
    {
 	   return "/image.jsp";
    }
+
    
 /*   
    @RequestMapping("/submitlabel")

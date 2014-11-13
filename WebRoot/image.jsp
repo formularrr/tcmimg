@@ -28,6 +28,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="./resources/uploadify/uploadify.css" type="text/css" media="screen" />
 	
 	<!-- 图片轮播插件 -->
+	<script type="text/javascript" src="./resources/Jcorp/js/jquery.Jcrop.min.js"></script>
+		<script type="text/javascript" src="./resources/Jcorp/js/jquery.color.js"></script>
+	<link rel="stylesheet" href="./resources/Jcorp/css/jquery.Jcrop.min.css" type="text/css" media="screen" />
+	
+	<!-- 图片裁剪插件 -->
 	<script type="text/javascript" src="./resources/jquery.bxslider/jquery.bxslider.min.js"></script>
 	<link rel="stylesheet" href="./resources/jquery.bxslider/jquery.bxslider.css" type="text/css" media="screen" />
 	
@@ -38,18 +43,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="bg-bottom">
 			<!-- Logo -->
 			<h1 id="logo"><a href="#">中草药图像检索系统</a></h1>
-			<!-- /Logo -->
-			
-			<!-- Search >
-			<div id="search">
-				<form action="#" method="post">
-					<fieldset>
-						<input type="text" name="string" value="" class="field" />
-						<input type="submit" value="SEARCH" class="submit" />
-					</fieldset>
-				</form>
-			</div>
-			<!-- /Search -->
 			
 			<div class="cl">&nbsp;</div>
 		</div>
@@ -74,8 +67,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div id="content" class="box">
 						<h3>请选择想要检索的图片 </h3>
 						<form name="form0" id="form0" >
+						<div style="float:left">
 							<input type="file" name="upload_image" id="upload_image" multiple="multiple" /><br>	<img src="" id="img0" width="500px" height="300px"></br>	
-							
+							<div class="row imgchoose" style="display:none;">
+								预览：<br />
+								<div style="width:200px;height:200px;margin:10px 10px 10px 0;overflow:hidden;"><img class="preview" id="preview3" src="" /></div>
+							</div>
 							
 							<div id="pic_type_div" style="display:none">
 							<form name="plant_type_form">
@@ -93,6 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 						
 					</div>
+
 					
 
 					<!-- Content -->
@@ -112,6 +110,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<!-- /Top Text Block -->
 				<!-- <h3>该图片有可能为 Carpinus betulus<h3></br> -->
 				<div class="bxslider" id="search_result"></div>
+				
+									
+
 				
 				<!-- Bottom Text Block -->
 				<div id="bottom" class="text-block">
@@ -154,6 +155,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 
 </div>
-
+<button type="button" style="" id="test">test</button>
 </body>
 </html>

@@ -1,13 +1,29 @@
-
+var root = "ftp://10.15.62.28";
 $(function(){
-
 	
+	$("#test").live('click', function() {
+		var obj = $.ajax({
+			type : "post",
+			url : "searchimage.html",
+			contentType:"application/json;charset=utf-8",
+			/* 			data : name,
+       			contentType : contentType,
+			dataType : "json",*/
+			cache : "false",
+
+			success : function(data) {
+				console.log(data);
+			}
+		})
+	});
+
     $("#upload_image").uploadify({
         height        : 30,
         swf           : './resources/uploadify/uploadify.swf',
 //        uploader      : './resources/uploadify/uploadify.php',
         uploader      : 'uploadimage.html',
         width         : 120,
+        'buttonText'		: '请选择图片',
         'method'   : 'post',
         'onUploadSuccess' : function(file, data, response) {
         	console.log(data);
@@ -15,6 +31,27 @@ $(function(){
         	var name = datas[0];
         	var type = datas[1];
         	$("#img0").attr("src", './resources/uploads/' + name);
+        	
+			$(".preview").attr("src",'./resources/uploads/' + name);
+			$('#img0').Jcrop({
+				minSize: [50,50],
+				setSelect: [0,0,300,300],
+				onChange: updatePreview,
+				onSelect: updatePreview,
+				onSelect: updateCoords,
+				aspectRatio: 1
+			},
+			function(){
+				// Use the API to get the real image size
+				var bounds = this.getBounds();
+				boundx = bounds[0];
+				boundy = bounds[1];
+				// Store the API in the jcrop_api variable
+				jcrop_api = this;
+			});
+			$(".imgchoose").show(1000);
+			$("#avatar_submit").show(1000);
+        	
         	$("#search_image").show();
         	$("#pic_type_div").show();
         	
@@ -27,51 +64,29 @@ $(function(){
            	$("#search_image").live('click', function() {
            		$('.bxslider').html("");
            		$("#search_result").html("");
+           		var dataJson = 
+           		{
+           			"name":name,
+           		};
+           		
         		var obj = $.ajax({
         			type : "post",
         			url : "searchimage.html",
-        			data : name,
+        			data : JSON.stringify(dataJson),
+        			dataType : "json",
+        			contentType:"application/json;charset=utf-8",
         /*        			contentType : contentType,
         			dataType : "json",*/
         			cache : "false",
-        /*        			statusCode : {
-        				400 : function() {
-        					alert("非法请求");
-        				},
-        				401 : function() {
-        					alert("非法用户");
-        				},
-        				403 : function() {
-        					alert("无权限");
-        				},
-        				404 : function() {
-        					alert("URL访问路径错误");
-        				},
-        				409 : function() {
-        					alert("操作冲突，不允许");
-        				},
-        				500 : function() {
-        					alert("服务器错误");
-        				}
-        			},*/
+
         			success : function(data) {
+        				console.log(data);
                    		$('.bxslider').html("");
                    		$("#search_result").html("");
-        				console.log(data);
-        				var list = data.substring(1, data.length - 1).split(",");
         				var tmp = "";
-        				for(var i = 0; i < list.length; ++i){
+        				for(var i = 0; i < data.rs.length; ++i){
         					
-        					var path = "ftp://10.15.62.28" + list[i].LTrim();
-        					path = path.RTrim();
-        					var all = path.split("+");
-        					
-        					var url = all[0];
-        					changeChinese(url);
-        					console.log(url + " '''" + all[1]);
-        					tmp += "<li>";
-        					tmp = tmp +	"<img src='" + url + "'  width='500px' height='300px' />"
-        					tmp += "</li>"
+        					tmp = tmp + "<li><img src='" +  root + data.rs[i][0] + "'  width='500px' height='300px' /></li>";
         				}
         				
         				$("#search_result").html(tmp);
@@ -93,9 +108,46 @@ $(function(){
         	
         }
     });
-
+var jcrop_api, boundx, boundy;
+	
+	function updateCoords(c)
+	{
+		$('#x').val(c.x);
+		$('#y').val(c.y);
+		$('#w').val(c.w);
+		$('#h').val(c.h);
+	};
+	function checkCoords()
+	{
+		if (parseInt($('#w').val())) return true;
+		alert('请选择图片上合适的区域');
+		return false;
+	};
+	function updatePreview(c){
+		if (parseInt(c.w) > 0){
+			var rx = 112 / c.w;
+			var ry = 112 / c.h;
+			$('#preview').css({
+				width: Math.round(rx * boundx) + 'px',
+            	height: Math.round(ry * boundy) + 'px',
+            	marginLeft: '-' + Math.round(rx * c.x) + 'px',
+            	marginTop: '-' + Math.round(ry * c.y) + 'px'
+			});
+		}
+		{
+			var rx = 200 / c.w;
+			var ry = 200 / c.h;
+			$('#preview3').css({
+				width: Math.round(rx * boundx) + 'px',
+				height: Math.round(ry * boundy) + 'px',
+				marginLeft: '-' + Math.round(rx * c.x) + 'px',
+				marginTop: '-' + Math.round(ry * c.y) + 'px'
+			});
+		}
+	};
 	
 });
+
 
 function init(){
 	$('.bxslider').bxSlider({
